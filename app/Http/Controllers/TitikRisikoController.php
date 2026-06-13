@@ -3,13 +3,29 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\TitikRisiko; // Tambahkan ini agar lebih rapi
+use App\Models\TitikRisiko;
 
 class TitikRisikoController extends Controller
 {
-    public function index()
+    public function index(Request $request) // <--- Tambahkan Request $request di sini
     {
-        $titikRisikos = TitikRisiko::all();
+        // 1. Siapkan builder query dasar
+        $query = TitikRisiko::query();
+
+        // 2. Filter berdasarkan Level Risiko jika user memilih salah satu level
+        if ($request->filled('level')) {
+            $query->where('level_risiko_awal', $request->level);
+        }
+
+        // 3. Filter berdasarkan Wilayah jika user mengetik sesuatu (menggunakan 'like' agar pencarian fleksibel)
+        if ($request->filled('wilayah')) {
+            $query->where('rt_rw', 'like', '%' . $request->wilayah . '%');
+        }
+
+        // 4. Ambil data hasil filter dengan urutan data terbaru di atas
+        $titikRisikos = $query->latest()->get();
+
+        // 5. Kembalikan ke view 'titik_risiko.index' sesuai struktur foldermu
         return view('titik_risiko.index', compact('titikRisikos'));
     }
 
@@ -20,7 +36,6 @@ class TitikRisikoController extends Controller
 
     public function store(Request $request)
     {
-        // Tambahkan validasi untuk rt_rw dan jenis_risiko
         $validated = $request->validate([
             'nama_titik'        => 'required|string|max:255',
             'alamat'            => 'required|string',
@@ -31,8 +46,9 @@ class TitikRisikoController extends Controller
             'level_risiko_awal' => 'required|in:rendah,sedang,tinggi',
         ]);
 
-        // Pastikan status aktif tersimpan (checkbox)
-        $validated['status_aktif'] = $request->has('status_aktif') ? true : true;
+        // Perbaikan kecil: ubah '? true : true' menjadi langsung '$request->has' 
+        // agar nilai checkbox bisa bernilai false jika tidak dicentang
+        $validated['status_aktif'] = $request->has('status_aktif');
 
         TitikRisiko::create($validated);
 
@@ -47,7 +63,6 @@ class TitikRisikoController extends Controller
 
     public function update(Request $request, string $id)
     {
-        // Sesuaikan validasi dengan store
         $validated = $request->validate([
             'nama_titik'        => 'required|string|max:255',
             'alamat'            => 'required|string',

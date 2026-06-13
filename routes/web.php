@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\TitikRisikoController;
 use App\Http\Controllers\PemeriksaanRisikoController;
-use App\Models\TitikRisiko;
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -26,13 +26,10 @@ Route::resource('titik-risiko', TitikRisikoController::class)
 Route::resource('pemeriksaan', PemeriksaanRisikoController::class)
      ->middleware(['auth']);
 
-Route::get('/risiko-tinggi', function () {
-    // Mencari titik risiko yang memiliki setidaknya satu pemeriksaan dengan status 'perlu tindakan'
-    $data = TitikRisiko::whereHas('pemeriksaan', function($query) {
-        $query->where('status_akhir', 'perlu tindakan');
-    })->get();
 
-    return view('laporan.risiko-tinggi', compact('data'));
-})->middleware(['auth'])->name('risiko-tinggi');
+// Rute untuk halaman kartu risiko tinggi khusus admin/petugas
+Route::get('/risiko-tinggi', [DashboardController::class, 'risikoTinggi'])
+    ->middleware(['auth'])
+    ->name('risiko-tinggi');
 
 require __DIR__.'/auth.php';

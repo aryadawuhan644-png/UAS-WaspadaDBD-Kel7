@@ -9,19 +9,24 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-   public function up(): void
-{
-    Schema::create('titik_risikos', function (Blueprint $table) {
-        $table->id();
-        $table->string('nama_titik'); // <--- Pastikan baris ini dan bawahnya ada
-        $table->text('alamat');
-        $table->string('rt_rw');
-        $table->enum('jenis_risiko', ['genangan', 'barang bekas', 'saluran air', 'tempat sampah']);
-        $table->enum('level_risiko_awal', ['rendah', 'sedang', 'tinggi']);
-        $table->boolean('status_aktif')->default(true);
-        $table->timestamps();
-    });
-}
+    public function up(): void
+    {
+        Schema::create('titik_risikos', function (Blueprint $table) {
+            $table->id();
+            $table->string('nama_titik'); 
+            $table->text('alamat');
+            $table->string('rt_rw');
+            
+            // ---> DUA BARIS INI DITAMBAHKAN <---
+            $table->string('latitude')->nullable(); 
+            $table->string('longitude')->nullable();
+            
+            $table->enum('jenis_risiko', ['genangan', 'barang bekas', 'saluran air', 'tempat sampah']);
+            $table->enum('level_risiko_awal', ['rendah', 'sedang', 'tinggi']);
+            $table->boolean('status_aktif')->default(true);
+            $table->timestamps();
+        });
+    }
 
     /**
      * Reverse the migrations.

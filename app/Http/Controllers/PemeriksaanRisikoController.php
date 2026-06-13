@@ -13,10 +13,23 @@ class PemeriksaanRisikoController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        // Mengambil semua data pemeriksaan beserta informasi titik risikonya
-        $pemeriksaans = \App\Models\PemeriksaanRisiko::with('titikRisiko')->get();
+        // 1. Siapkan query dengan relasi
+        $query = PemeriksaanRisiko::with(['titikRisiko', 'petugas']);
+
+        // 2. Filter berdasarkan Status Akhir (dari dropdown)
+        if ($request->filled('status')) {
+            $query->where('status_akhir', $request->status);
+        }
+
+        // 3. Filter berdasarkan Tanggal (opsional)
+        if ($request->filled('tanggal')) {
+            $query->whereDate('tanggal_pemeriksaan', $request->tanggal);
+        }
+
+        // 4. Ambil data
+        $pemeriksaans = $query->latest()->get();
     
         return view('pemeriksaan.index', compact('pemeriksaans'));
     }

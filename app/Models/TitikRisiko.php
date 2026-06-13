@@ -30,4 +30,16 @@ class TitikRisiko extends Model
     {
         return $this->hasMany(PemeriksaanRisiko::class, 'titik_risiko_id');
     }
+
+    /**
+     * Scope untuk mengambil titik risiko yang dianggap 'tinggi'.
+     * Definisi: level_risiko_awal == 'tinggi' OR punya pemeriksaan dengan status 'perlu tindakan'.
+     */
+    public function scopeHighRisk($query)
+    {
+        return $query->where('level_risiko_awal', 'tinggi')
+                     ->orWhereHas('pemeriksaan', function ($q) {
+                         $q->where('status_akhir', 'perlu tindakan');
+                     });
+    }
 }
