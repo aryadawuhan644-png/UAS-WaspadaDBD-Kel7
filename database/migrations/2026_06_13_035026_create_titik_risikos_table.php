@@ -16,8 +16,6 @@ return new class extends Migration
         $table->string('nama_titik'); // <--- Pastikan baris ini dan bawahnya ada
         $table->text('alamat');
         $table->string('rt_rw');
-        $table->decimal('latitude', 10, 8);
-        $table->decimal('longitude', 11, 8);
         $table->enum('jenis_risiko', ['genangan', 'barang bekas', 'saluran air', 'tempat sampah']);
         $table->enum('level_risiko_awal', ['rendah', 'sedang', 'tinggi']);
         $table->boolean('status_aktif')->default(true);

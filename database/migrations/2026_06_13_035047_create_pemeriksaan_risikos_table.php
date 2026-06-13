@@ -14,7 +14,6 @@ return new class extends Migration
     Schema::create('pemeriksaan_risikos', function (Blueprint $table) {
         $table->id();
         $table->foreignId('titik_risiko_id')->constrained('titik_risikos')->onDelete('cascade');
-        $table->foreignId('petugas_id')->constrained('users')->onDelete('cascade');
         $table->date('tanggal_pemeriksaan');
         $table->boolean('ditemukan_jentik');
         $table->text('kondisi_lingkungan');
