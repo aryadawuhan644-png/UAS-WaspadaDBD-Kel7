@@ -29,6 +29,15 @@ class TitikRisikoController extends Controller
         return view('titik_risiko.index', compact('titikRisikos'));
     }
 
+    public function jumlah()
+{
+    // Mengambil semua data untuk ditampilkan di kotak-kotak
+    $titik_risikos = \App\Models\TitikRisiko::all();
+    
+    // UBAH BAGIAN INI: pakai underscore (titik_risiko) bukan strip
+    return view('titik_risiko.jumlah', compact('titik_risikos'));
+}
+
     public function create()
     {
         return view('titik_risiko.create');
