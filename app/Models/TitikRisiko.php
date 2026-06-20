@@ -12,12 +12,16 @@ class TitikRisiko extends Model
     protected $fillable = [
         'nama_titik',
         'alamat',
+        'provinsi',
+        'kabupaten_kota',
+        'kecamatan',
         'rt_rw',
         'latitude',
         'longitude',
         'jenis_risiko',
         'level_risiko_awal',
         'status_aktif',
+        'foto_awal', // Menambahkan kolom foto_awal ke dalam fillable
     ];
 
     protected $casts = [
@@ -42,4 +46,7 @@ class TitikRisiko extends Model
                          $q->where('status_akhir', 'perlu tindakan');
                      });
     }
+
+    
+
 }

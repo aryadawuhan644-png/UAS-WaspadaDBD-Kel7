@@ -12,6 +12,7 @@
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
         <!-- Scripts -->
+            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans antialiased">
@@ -29,6 +30,26 @@
 
             <!-- Page Content -->
             <main>
+                @if (session('success'))
+                    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 py-4">
+                        <div class="rounded-lg bg-green-50 border border-green-200 text-green-800 p-4">
+                            {{ session('success') }}
+                        </div>
+                    </div>
+                @endif
+
+                @if ($errors->any())
+                    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 py-4">
+                        <div class="rounded-lg bg-red-50 border border-red-200 text-red-800 p-4">
+                            <ul class="list-disc list-inside space-y-1">
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    </div>
+                @endif
+
                 {{ $slot }}
             </main>
         </div>
