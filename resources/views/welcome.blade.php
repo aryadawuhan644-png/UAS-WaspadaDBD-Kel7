@@ -12,7 +12,7 @@
     <div class="min-h-screen flex flex-col">
         <header class="w-full p-6 flex justify-between items-center bg-white shadow-sm">
             <div class="flex items-center gap-2">
-                <img src="{{ asset('images/logo.png') }}" alt="Logo BAMUK" class="w-10 h-10">
+                <img src="{{ asset('img/logo.png') }}" alt="Logo BAMUK" class="w-12 h-12">
                 <span class="font-bold text-xl text-blue-600">BAMUK</span>
             </div>
             

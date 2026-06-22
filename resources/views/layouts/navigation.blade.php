@@ -2,11 +2,11 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
             <div class="flex">
-                <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
-                        <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
-                    </a>
-                </div>
+<div class="shrink-0 flex items-center">
+    <a href="{{ route('dashboard') }}">
+        <img src="{{ asset('img/logo.png') }}" class="h-12 w-auto" alt="Logo WaspadaDBD">
+    </a>
+</div>
 
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
@@ -18,7 +18,7 @@
         {{ __('Pemeriksaan') }}
     </x-nav-link>
 
-    <x-nav-link :href="route('titik-risiko.jumlah')" :active="request()->routeIs('titik-risiko.*')">
+    <x-nav-link :href="route('titik-risiko.jumlah')" :active="false">
         {{ __('Jumlah Titik Risiko') }}
     </x-nav-link>
 
@@ -82,7 +82,7 @@
                     {{ __('Pemeriksaan') }}
                 </x-responsive-nav-link>
 
-                <x-responsive-nav-link :href="route('titik-risiko.index')" :active="request()->routeIs('titik-risiko.*')">
+                <x-responsive-nav-link :href="route('titik-risiko.index')" :active="false">
                     {{ __('Jumlah Titik Risiko') }}
                 </x-responsive-nav-link>
 
