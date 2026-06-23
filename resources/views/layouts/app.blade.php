@@ -24,6 +24,40 @@
                 <header class="bg-white shadow">
                     <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                         {{ $header }}
+                        @php
+                            $route = Route::currentRouteName() ?? '';
+                            $backUrl = null;
+
+                            // If on the main dashboard, hide back button
+                            if($route === 'dashboard') {
+                                $backUrl = null;
+                            }
+                            // If on a top-level menu index, back goes to dashboard
+                            elseif(in_array($route, ['pemeriksaan.index','titik-risiko.index','titik-risiko.jumlah','edukasi.index','petugas.index'])) {
+                                $backUrl = route('dashboard');
+                            }
+                            // For routes inside menus, send back to that menu's index
+                            else {
+                                if(\Illuminate\Support\Str::startsWith($route, 'pemeriksaan.')) {
+                                    $backUrl = route('pemeriksaan.index');
+                                } elseif(\Illuminate\Support\Str::startsWith($route, 'titik-risiko.')) {
+                                    $backUrl = route('titik-risiko.index');
+                                } elseif(\Illuminate\Support\Str::startsWith($route, 'petugas.')) {
+                                    $backUrl = route('petugas.index');
+                                } elseif(\Illuminate\Support\Str::startsWith($route, 'edukasi.')) {
+                                    $backUrl = route('edukasi.index');
+                                } else {
+                                    // fallback to previous URL for other pages
+                                    $backUrl = url()->previous();
+                                }
+                            }
+                        @endphp
+
+                        @if($backUrl)
+                            <div class="mt-3">
+                                <a href="{{ $backUrl }}" class="inline-flex items-center px-3 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200">&larr; Kembali</a>
+                            </div>
+                        @endif
                     </div>
                 </header>
             @endisset

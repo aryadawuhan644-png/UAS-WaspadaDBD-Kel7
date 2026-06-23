@@ -42,8 +42,9 @@
                 </p>
                 
                 <div class="flex gap-4 justify-center">
-                    <a href="{{ route('edukasi.publik') }}" class="px-8 py-3 bg-green-600 text-white font-bold rounded-xl hover:bg-green-700 transition shadow-lg">
-                        Lihat Edukasi
+                    {{-- Ganti URL href di bawah ini dengan alamat Laragon Frontend PHP Native Anda --}}
+                    <a href="http://frontend-zayy.test/index.php" class="px-8 py-3 bg-green-600 text-white font-bold rounded-xl hover:bg-green-700 transition shadow-lg">
+                        Lihat Dashboard Warga
                     </a>
                 </div>
             </div>

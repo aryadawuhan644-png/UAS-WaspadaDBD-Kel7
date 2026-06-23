@@ -53,7 +53,7 @@ class EdukasiDbdController extends Controller
             'judul'    => 'required|string|max:255',
             'konten'   => 'required|string',
             'kategori' => 'required|in:pencegahan,gejala,penanganan,fakta unik',
-            'gambar'   => 'nullable|image|mimes:jpeg,png,jpg|max:2048', // Validasi foto
+            'gambar'   => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
         $validated['admin_id'] = Auth::id();
@@ -68,10 +68,34 @@ class EdukasiDbdController extends Controller
         return redirect()->route('edukasi.index')->with('success', 'Materi edukasi berhasil dipublikasikan!');
     }
 
-    // Untuk fungsi edit, update, dan destroy bisa menggunakan pola yang persis sama dengan CRUD Titik Risiko sebelumnya.
     public function destroy($id)
     {
         EdukasiDbd::findOrFail($id)->delete();
         return redirect()->route('edukasi.index')->with('success', 'Edukasi dihapus!');
+    }
+
+    // ==========================================
+    // 3. AREA API (Frontend PHP Native)
+    // ==========================================
+
+    public function getApiEdukasi()
+    {
+        $edukasi = EdukasiDbd::latest()->get();
+        return response()->json([
+            'success' => true,
+            'data' => $edukasi
+        ]);
+    }
+
+    public function getApiEdukasiDetail($id)
+    {
+        $edukasi = EdukasiDbd::find($id);
+        if (!$edukasi) {
+            return response()->json(['success' => false, 'message' => 'Not found'], 404);
+        }
+        return response()->json([
+            'success' => true,
+            'data' => $edukasi
+        ]);
     }
 }

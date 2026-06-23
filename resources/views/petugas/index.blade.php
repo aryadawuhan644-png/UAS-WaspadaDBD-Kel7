@@ -1,8 +1,10 @@
 <x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">{{ __('Daftar Pengguna') }}</h2>
+    </x-slot>
     <div class="py-12">
         <div class="max-w-6xl mx-auto px-4">
-            <div class="flex justify-between items-center mb-6">
-                <h2 class="text-2xl font-bold text-gray-800">Daftar Pengguna</h2>
+            <div class="flex justify-end items-center mb-6">
                 <a href="{{ route('petugas.create') }}" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition">
                     + Tambah Pengguna
                 </a>

@@ -48,26 +48,31 @@ class PemeriksaanRisiko extends Model
 
     public function getSkorRisikoAttribute()
     {
-        $skor = 0;
-        if ($this->ditemukan_jentik) $skor += 50;
-        if ($this->ada_wadah) $skor += 30;
-        if ($this->kondisi_lingkungan === 'kotor') $skor += 20;
-        
-        return $skor;
+        if ($this->status_akhir === 'aman') {
+            return 100;
+        } elseif ($this->status_akhir === 'perlu pemantauan') {
+            return 50;
+        } else {
+            return 0;
+        }
     }
 
     public function getWarnaRisikoAttribute()
     {
         $skor = $this->skor_risiko;
-        if ($skor == 0) return 'green';
-        if ($skor <= 50) return 'yellow';
+        if ($skor == 100) return 'green';
+        if ($skor == 50) return 'yellow';
         return 'red';
     }
+
     public function getLevelRisikoAttribute()
-{
-    $skor = $this->skor_risiko;
-    if ($skor == 0) return 'Rendah';
-    if ($skor <= 50) return 'Sedang';
-    return 'Tinggi';
-}
+    {
+        if ($this->status_akhir === 'aman') {
+            return 'Rendah';
+        } elseif ($this->status_akhir === 'perlu pemantauan') {
+            return 'Sedang';
+        } else {
+            return 'Tinggi';
+        }
+    }
 }

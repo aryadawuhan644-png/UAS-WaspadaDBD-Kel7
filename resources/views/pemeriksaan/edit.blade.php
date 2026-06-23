@@ -1,7 +1,9 @@
 <x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">{{ __('Edit Data Pemeriksaan') }}</h2>
+    </x-slot>
     <div class="py-12">
         <div class="max-w-3xl mx-auto bg-white p-8 rounded-lg shadow-sm">
-            <h2 class="text-2xl font-bold mb-6 text-gray-800 border-b pb-2">Edit Data Pemeriksaan</h2>
             
             <form action="{{ route('pemeriksaan.update', $pemeriksaan->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf

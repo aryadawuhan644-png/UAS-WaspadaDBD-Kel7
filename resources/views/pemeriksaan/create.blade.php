@@ -1,9 +1,11 @@
 <x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">{{ __('Form Pemeriksaan Baru') }}</h2>
+    </x-slot>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 
     <div class="py-12">
         <div class="max-w-5xl mx-auto sm:px-6 lg:px-8 bg-white p-8 shadow-sm rounded-xl">
-            <h2 class="text-2xl font-bold mb-2 text-gray-800">Form Pemeriksaan Baru</h2>
             <p class="text-sm text-gray-500 mb-6 italic">Input hasil pemeriksaan untuk lokasi target di bawah ini:</p>
 
             <div class="mb-8 p-6 bg-blue-50 border border-blue-100 rounded-xl flex flex-col md:flex-row gap-8 shadow-sm">

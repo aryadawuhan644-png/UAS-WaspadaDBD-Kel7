@@ -14,22 +14,22 @@
                         <p class="text-sm text-gray-500">Pilih bulan dan lokasi wilayah untuk melihat riwayat.</p>
                     </div>
                     <form method="GET" action="{{ route('pemeriksaan.index') }}" class="grid grid-cols-1 md:grid-cols-5 gap-3 items-end">
-                        <input type="month" name="bulan" value="{{ $filterBulan }}" class="border-gray-300 rounded-lg focus:ring-blue-500 text-gray-700 font-medium">
+                        <input type="month" name="bulan" value="{{ $filterBulan }}" class="w-full border-gray-300 rounded-lg focus:ring-blue-500 text-gray-700 font-medium">
                         
-                        <select name="provinsi" id="provinsi" class="border-gray-300 rounded-lg text-sm">
+                        <select name="provinsi" id="provinsi" class="w-full border-gray-300 rounded-lg text-sm">
                             <option value="">-- Provinsi --</option>
                             @foreach($provinces as $prov)
                                 <option value="{{ $prov->name }}" {{ request('provinsi') == $prov->name ? 'selected' : '' }}>{{ $prov->name }}</option>
                             @endforeach
                         </select>
-                        <select name="kabupaten_kota" id="kabupaten_kota" class="border-gray-300 rounded-lg text-sm">
+                        <select name="kabupaten_kota" id="kabupaten_kota" class="w-full border-gray-300 rounded-lg text-sm">
                             <option value="{{ request('kabupaten_kota') }}">{{ request('kabupaten_kota') ?: '-- Pilih Kota/Kab --' }}</option>
                         </select>
-                        <select name="kecamatan" id="kecamatan" class="border-gray-300 rounded-lg text-sm">
+                        <select name="kecamatan" id="kecamatan" class="w-full border-gray-300 rounded-lg text-sm">
                             <option value="{{ request('kecamatan') }}">{{ request('kecamatan') ?: '-- Pilih Kecamatan --' }}</option>
                         </select>
 
-                        <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2.5 rounded-lg font-bold transition shadow-sm">Tampilkan</button>
+                        <button type="submit" class="w-full md:w-auto bg-blue-600 hover:bg-blue-700 text-white px-6 py-2.5 rounded-lg font-bold transition shadow-sm">Tampilkan</button>
                     </form>
                 </div>
 
@@ -120,18 +120,18 @@
                 
                 <div class="bg-white p-6 rounded-lg shadow-sm mb-6 border-l-4 border-green-500">
                     <form method="GET" action="{{ route('pemeriksaan.index') }}" class="flex flex-col md:flex-row gap-4 items-end">
-                        <div>
+                        <div class="w-full md:w-auto">
                             <label class="block text-sm font-bold text-gray-700">Filter Status</label>
-                            <select name="status" class="rounded-md border-gray-300">
+                            <select name="status" class="w-full md:w-auto rounded-md border-gray-300">
                                 <option value="">-- Semua --</option>
                                 <option value="aman" {{ request('status') == 'aman' ? 'selected' : '' }}>Aman</option>
                                 <option value="perlu pemantauan" {{ request('status') == 'perlu pemantauan' ? 'selected' : '' }}>Pemantauan</option>
                                 <option value="perlu tindakan" {{ request('status') == 'perlu tindakan' ? 'selected' : '' }}>Tindakan</option>
                             </select>
                         </div>
-                        <div>
+                        <div class="w-full md:w-auto">
                             <label class="block text-sm font-bold text-gray-700">Filter Tanggal</label>
-                            <input type="date" name="tanggal" value="{{ request('tanggal') }}" class="rounded-md border-gray-300">
+                            <input type="date" name="tanggal" value="{{ request('tanggal') }}" class="w-full md:w-auto rounded-md border-gray-300">
                         </div>
                         <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded shadow">Cari</button>
                         <a href="{{ route('pemeriksaan.index') }}" class="text-gray-500 underline">Reset</a>

@@ -1,7 +1,9 @@
 <x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">{{ __('Edit Data Pengguna') }}</h2>
+    </x-slot>
     <div class="py-12">
         <div class="max-w-4xl mx-auto px-4">
-            <h2 class="text-2xl font-bold mb-6">Edit Data Pengguna</h2>
             
             <form action="{{ route('petugas.update', $user->id) }}" method="POST" class="bg-white p-8 rounded-lg shadow-sm border border-gray-200">
                 @csrf @method('PUT')

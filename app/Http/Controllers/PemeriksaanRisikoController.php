@@ -117,6 +117,18 @@ class PemeriksaanRisikoController extends Controller
 
         $pemeriksaan->save();
 
+        $mapStatus = [
+            'aman' => 'rendah',
+            'perlu pemantauan' => 'sedang',
+            'perlu tindakan' => 'tinggi'
+        ];
+        $titik = TitikRisiko::find($request->titik_risiko_id);
+        if ($titik) {
+            $titik->update([
+                'level_risiko_awal' => $mapStatus[$request->status_akhir]
+            ]);
+        }
+
         return redirect()->route('dashboard')->with('success', 'Data pemeriksaan berhasil ditambahkan!');
     }
     
@@ -157,6 +169,18 @@ class PemeriksaanRisikoController extends Controller
         }
 
         $pemeriksaan->save();
+
+        $mapStatus = [
+            'aman' => 'rendah',
+            'perlu pemantauan' => 'sedang',
+            'perlu tindakan' => 'tinggi'
+        ];
+        $titik = TitikRisiko::find($request->titik_risiko_id);
+        if ($titik) {
+            $titik->update([
+                'level_risiko_awal' => $mapStatus[$request->status_akhir]
+            ]);
+        }
         
         return redirect()->route('pemeriksaan.index')->with('success', 'Data berhasil diupdate!');
     }

@@ -1,1 +1,1 @@
-<img src="{{ asset('img/logo.png') }}" class="h-9 w-auto" alt="Logo WaspadaDBD">
+<img src="{{ asset('img/logo.png') }}" class="h-12 w-auto" alt="Logo WaspadaDBD">

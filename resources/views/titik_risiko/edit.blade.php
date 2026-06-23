@@ -1,8 +1,10 @@
 <x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">{{ __('Edit Titik Risiko') }}</h2>
+    </x-slot>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <div class="py-12">
         <div class="max-w-2xl mx-auto bg-white p-8 rounded-lg shadow-sm border border-gray-100">
-            <h2 class="text-2xl font-bold mb-6 text-gray-800 border-b pb-2">Edit Titik Risiko</h2>
             
             <form action="{{ route('titik-risiko.update', $titik->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
@@ -49,7 +51,7 @@
                     <input type="text" name="rt_rw" value="{{ $titik->rt_rw }}" class="w-full border-gray-300 rounded-md focus:ring-blue-500" required>
                 </div>
 
-                <div class="grid grid-cols-2 gap-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div class="mb-4">
                         <label class="block font-medium mb-1">Jenis Risiko</label>
                         <select name="jenis_risiko" class="w-full border-gray-300 rounded-md focus:ring-blue-500">
@@ -78,7 +80,7 @@
                     <div id="map" class="w-full h-64 rounded-md border border-gray-300 z-10"></div>
                 </div>
 
-                <div class="grid grid-cols-2 gap-4 mt-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
                     <div>
                         <label class="block font-medium mb-1">Latitude</label>
                         <input type="text" name="latitude" id="latitude" value="{{ $titik->latitude }}" class="w-full border-gray-300 rounded-md bg-gray-50" readonly />
