@@ -41,6 +41,7 @@
                                         </span>
                                     </td>
                                     <td class="p-4 flex gap-2">
+                                        <a href="{{ route('edukasi.edit', $item->id) }}" class="bg-yellow-50 hover:bg-yellow-100 text-yellow-700 px-3 py-1 rounded text-sm font-semibold transition border border-yellow-200">Edit</a>
                                         <form action="{{ route('edukasi.destroy', $item->id) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus edukasi ini?');">
                                             @csrf
                                             @method('DELETE')
