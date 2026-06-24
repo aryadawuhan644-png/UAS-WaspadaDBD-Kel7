@@ -75,8 +75,11 @@ class TitikRisikoController extends Controller
 
 
         if ($request->hasFile('foto_awal')) {
-            $validated['foto_awal'] = $request->file('foto_awal')->store('foto_awal', 'public');
-        }
+    $file = $request->file('foto_awal');
+    $filename = time().'_'.$file->getClientOriginalName();
+    $file->move(public_path('foto_awal'), $filename);
+    $validated['foto_awal'] = $filename;
+}
         TitikRisiko::create($validated);
         return redirect()->route('titik-risiko.jumlah')->with('success', 'Data berhasil ditambahkan!');
     }
@@ -128,8 +131,11 @@ class TitikRisikoController extends Controller
         $validated['kecamatan']      = District::find($request->kecamatan)?->name ?? $request->kecamatan;
 
         if ($request->hasFile('foto_awal')) {
-            $validated['foto_awal'] = $request->file('foto_awal')->store('foto_awal', 'public');
-        }
+    $file = $request->file('foto_awal');
+    $filename = time().'_'.$file->getClientOriginalName();
+    $file->move(public_path('foto_awal'), $filename);
+    $validated['foto_awal'] = $filename;
+}
 
         $titik->update($validated);
         

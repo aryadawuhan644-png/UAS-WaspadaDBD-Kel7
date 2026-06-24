@@ -82,7 +82,7 @@
                                     <div class="text-center">
                                         <p class="text-[10px] font-bold text-gray-400 uppercase mb-1">Foto Awal</p>
                                         @if($p->titikRisiko && $p->titikRisiko->foto_awal)
-                                            <img src="{{ asset('storage/' . $p->titikRisiko->foto_awal) }}" class="w-full h-24 object-cover rounded-lg border shadow-sm">
+                                            <img src="{{ asset('storage/' . $pemeriksaan->titikRisiko->foto_awal) }}" class="w-full h-24 object-cover rounded-lg border shadow-sm">
                                         @else
                                             <div class="w-full h-24 bg-gray-100 text-gray-400 text-xs flex items-center justify-center rounded-lg border border-dashed">No Image</div>
                                         @endif
@@ -90,7 +90,7 @@
                                     <div class="text-center">
                                         <p class="text-[10px] font-bold text-gray-400 uppercase mb-1">Foto Akhir</p>
                                         @if($p->foto)
-                                            <img src="{{ asset('storage/' . $p->foto) }}" class="w-full h-24 object-cover rounded-lg border shadow-sm">
+                                             <img src="{{ asset('storage/' . $pemeriksaan->foto) }}" class="w-full h-24 object-cover rounded-lg border shadow-sm">
                                         @else
                                             <div class="w-full h-24 bg-gray-100 text-gray-400 text-xs flex items-center justify-center rounded-lg border border-dashed">No Image</div>
                                         @endif
