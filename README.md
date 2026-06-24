@@ -1,66 +1,201 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🦟 BAMUK — Basmi Nyamuk
+### Sistem Pemantauan Risiko Demam Berdarah Berbasis Lingkungan
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+> **Pantau • Laporkan • Cegah**
 
-## About Laravel
+Aplikasi web end-to-end untuk membantu petugas jumantik mencatat titik risiko DBD, melakukan pemeriksaan lingkungan, mengklasifikasikan level risiko, dan memantau status tindak lanjut secara digital — menggantikan pencatatan berbasis formulir kertas.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+---
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 👥 Anggota Kelompok
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+| Nama | NIM | Peran |
+|------|-----|-------|
+| Alifia Az-Zahra Murtidewi | 24102004 | UI/UX Designer & Dokumentasi |
+| Arya Anugrah Saputra | 24102027 | Backend Developer |
+| Audina Ike Wati | 24102028 | Project Manager & Dokumentasi |
+| Zayyan Muhammad Ihsan Syafatullah | 24102039 | Frontend Developer & DevOps |
 
-## Learning Laravel
+---
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## ✨ Fitur Aplikasi
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+### Backend Laravel (Admin & Petugas)
+- 🔐 Login dengan role-based access (Admin & Petugas)
+- 📊 Dashboard statistik jumlah titik risiko, risiko tinggi, dan pemeriksaan bulan ini
+- 📍 CRUD Titik Risiko (nama, alamat, RT/RW, koordinat, jenis & level risiko)
+- 🔬 CRUD Pemeriksaan Risiko (jentik, kondisi lingkungan, tindakan, status akhir)
+- 🔽 Filter data berdasarkan level risiko, wilayah, dan status
+- ✅ Validasi input semua form
+- 🔒 Middleware auth — seluruh halaman backend diproteksi login
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### Frontend PHP Native (Publik)
+- 🏠 Halaman beranda BAMUK
+- 📚 Halaman edukasi DBD (3M Plus & pencegahan)
+- 📋 Daftar titik risiko dengan badge level berwarna
+- 🔍 Detail titik risiko & riwayat pemeriksaan
+- 🔎 Pencarian lokasi berdasarkan nama atau wilayah
+- 📡 Semua data diambil dari API Laravel
+- 📱 Responsif di desktop dan mobile
 
-## Laravel Sponsors
+### Fitur Inovasi
+- 🟢🟡🔴 Badge risiko: rendah (hijau), sedang (kuning), tinggi (merah)
+- 🗺️ Link Google Maps dari koordinat latitude/longitude
+- 📜 Riwayat pemeriksaan per titik risiko
+- ⚠️ Penanda titik risiko yang belum pernah diperiksa
+- 📖 Halaman edukasi DBD dengan konten Kemenkes
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+---
 
-### Premium Partners
+## 🛠️ Teknologi
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+| Komponen | Teknologi |
+|----------|-----------|
+| Backend | Laravel 11 |
+| Frontend | PHP Native + HTML + Bootstrap 5 |
+| Database | MySQL / MariaDB |
+| API | REST API (JSON) |
+| Auth | Laravel Session Auth + Middleware |
+| Deploy | InfinityFree (rf.gd) |
 
-## Contributing
+---
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## ⚙️ Cara Instalasi
 
-## Code of Conduct
+### Prasyarat
+- PHP >= 8.1
+- Composer
+- MySQL / MariaDB
+- Node.js (opsional, untuk asset)
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### Langkah-langkah
 
-## Security Vulnerabilities
+**1. Clone repository**
+```bash
+git clone https://github.com/aryadawuhan644/UAS-WaspadaDBD-Kel8.git
+cd UAS-WaspadaDBD-Kel8
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+**2. Install dependency**
+```bash
+composer install
+```
 
-## License
+**3. Konfigurasi environment**
+```bash
+cp .env.example .env
+php artisan key:generate
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+**4. Atur database di file `.env`**
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=waspadadbd_db
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
+**5. Jalankan migration dan seeder**
+```bash
+php artisan migrate
+php artisan db:seed
+```
+
+**6. Jalankan server**
+```bash
+php artisan serve
+```
+
+**7. Akses aplikasi**
+- Backend: `http://127.0.0.1:8000/login`
+- Frontend: `http://127.0.0.1:8000`
+
+---
+
+## 🔑 Akun Demo
+
+| Role | Email | Password |
+|------|-------|----------|
+| Admin | admin@demo.com | password123 |
+| Petugas | petugasdua@demo.com | password123 |
+
+> ⚠️ Seluruh data yang digunakan merupakan **data dummy/simulasi**. Tidak ada data nyata, NIK, atau informasi pribadi yang digunakan.
+
+---
+
+## 🌐 Link Deploy
+
+| Halaman | URL |
+|---------|-----|
+| Frontend / Beranda | https://waspada-dbd.rf.gd/ |
+| Backend / Admin | https://waspada-dbd.rf.gd/login |
+
+---
+
+## 📡 Endpoint API
+
+| Method | Endpoint | Keterangan |
+|--------|----------|------------|
+| GET | `/api/titik-risiko` | Menampilkan semua titik risiko |
+| GET | `/api/titik-risiko/{id}` | Detail satu titik risiko |
+| GET | `/api/titik-risiko/{id}/pemeriksaan` | Riwayat pemeriksaan per titik |
+| POST | `/api/pemeriksaan-risiko` | Mencatat pemeriksaan baru |
+| GET | `/api/titik-risiko/level/{level}` | Filter titik risiko berdasarkan level (rendah/sedang/tinggi) |
+
+### Contoh Response GET `/api/titik-risiko`
+```json
+{
+  "data": [
+    {
+      "id": 1,
+      "nama_titik": "Genangan Lahan Kosong",
+      "alamat": "Jl. S. Supriadi, Sukun",
+      "rt_rw": "RT 01/RW 02",
+      "latitude": "-7.99423",
+      "longitude": "112.62001",
+      "jenis_risiko": "genangan",
+      "level_risiko_awal": "tinggi",
+      "status_aktif": true
+    }
+  ]
+}
+```
+
+---
+
+## 🗂️ Struktur Database
+
+| Tabel | Keterangan |
+|-------|------------|
+| `users` | Data admin dan petugas (role: admin/petugas) |
+| `titik_risikos` | Data titik lokasi risiko DBD |
+| `pemeriksaan_risikos` | Hasil pemeriksaan per titik risiko |
+| `edukasi_dbds` | Konten edukasi pencegahan DBD |
+
+---
+
+## 🤖 AI Usage Log
+
+AI digunakan sebagai alat bantu selama pengerjaan. Seluruh hasil AI telah diverifikasi, dipahami, dan direvisi oleh tim sebelum diterapkan. Penggunaan AI mencakup: referensi desain, rancangan ERD, kode migration Laravel, CRUD controller, konfigurasi API, pengembangan frontend PHP native, debugging CORS, proses deploy, dan penulisan dokumentasi.
+
+Tools yang digunakan: **ChatGPT**, **Google Gemini**, **Claude**
+
+---
+
+## 📋 Pembagian Tugas
+
+| Anggota | Kontribusi |
+|---------|------------|
+| Alifia Az-Zahra Murtidewi | Merancang tampilan dan alur antarmuka aplikasi BAMUK, membuat referensi desain frontend, membantu penulisan laporan |
+| Arya Anugrah Saputra | Membangun backend Laravel, implementasi CRUD, autentikasi role-based, middleware auth, dan endpoint API |
+| Audina Ike Wati | Koordinasi project, menyusun laporan PDF, merancang ERD dan desain database, memastikan timeline terpenuhi |
+| Zayyan Muhammad Ihsan Syafatullah | Membangun frontend PHP native, integrasi API Laravel ke frontend, dan deploy aplikasi ke server live |
+
+---
+
+## 📄 Lisensi
+
+Project ini dibuat untuk memenuhi tugas UAS mata kuliah **Pemrograman Web**  
+Program Studi S1 Informatika — ITSK RS dr. Soepraoen Kesdam V/Brawijaya Malang — 2026
