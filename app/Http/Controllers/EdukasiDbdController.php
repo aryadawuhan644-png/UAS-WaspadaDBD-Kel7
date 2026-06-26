@@ -60,13 +60,70 @@ class EdukasiDbdController extends Controller
 
         // Logika simpan gambar ke folder storage/app/public/edukasi_images
         if ($request->hasFile('gambar')) {
-            $validated['gambar'] = $request->file('gambar')->store('edukasi_images', 'public');
+            $file = $request->file('gambar');
+
+$namaFile = time().'_'.$file->getClientOriginalName();
+
+$file->move(
+    base_path('storage/edukasi_images'),
+    $namaFile
+);
+
+$validated['gambar'] = 'edukasi_images/'.$namaFile;
         }
 
         EdukasiDbd::create($validated);
 
         return redirect()->route('edukasi.index')->with('success', 'Materi edukasi berhasil dipublikasikan!');
     }
+
+    public function edit($id)
+    {
+        $edukasi = EdukasiDbd::findOrFail($id);
+        return view('edukasi.edit', compact('edukasi'));
+    }
+
+    public function update(Request $request, $id)
+{
+    $edukasi = EdukasiDbd::findOrFail($id);
+
+    $validated = $request->validate([
+        'judul'    => 'required|string|max:255',
+        'konten'   => 'required|string',
+        'kategori' => 'required|in:pencegahan,gejala,penanganan,fakta unik',
+        'gambar'   => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+    ]);
+
+    if ($request->hasFile('gambar')) {
+
+        // hapus gambar lama
+        if ($edukasi->gambar) {
+
+            $pathLama = base_path('storage/' . $edukasi->gambar);
+
+            if (file_exists($pathLama)) {
+                unlink($pathLama);
+            }
+        }
+
+        $file = $request->file('gambar');
+
+        $namaFile = time().'_'.$file->getClientOriginalName();
+
+        $file->move(
+            base_path('storage/edukasi_images'),
+            $namaFile
+        );
+
+        $validated['gambar'] = 'edukasi_images/'.$namaFile;
+    }
+
+    $edukasi->update($validated);
+
+    return redirect()
+        ->route('edukasi.index')
+        ->with('success','Materi edukasi berhasil diperbarui!');
+}
 
     public function destroy($id)
     {

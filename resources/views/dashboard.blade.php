@@ -4,7 +4,7 @@
             
             <!-- Modern Header -->
             <div class="mb-10 px-4 sm:px-0">
-                <h1 class="text-3xl font-extrabold text-white tracking-tight">Halo, {{ explode(' ', auth()->user()->name)[0] }}! 👋</h1>
+<h1 class="text-3xl font-extrabold tracking-tight" style="color:#ffffff;">Halo, {{ explode(' ', auth()->user()->name)[0] }}! 👋</h1>
                 <p class="text-gray-400 mt-2 text-sm">Berikut adalah ringkasan WaspadaDBD hari ini.</p>
             </div>
 
@@ -17,7 +17,7 @@
                             <svg class="w-24 h-24 text-blue-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path></svg>
                         </div>
                         <p class="text-xs text-gray-400 uppercase tracking-widest font-bold mb-2">Total Titik</p>
-                        <p class="text-4xl font-black text-white">{{ $total_titik }}</p>
+                        <p class="text-4xl font-black" style="color:#ffffff;">{{ $total_titik }}</p>
                         <p class="text-xs text-blue-500 mt-4 flex items-center font-medium">Lihat semua data <svg class="w-3 h-3 ml-1 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg></p>
                     </a>
 
@@ -49,7 +49,9 @@
                             <svg class="w-24 h-24 text-purple-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path></svg>
                         </div>
                         <p class="text-xs text-gray-400 uppercase tracking-widest font-bold mb-2">Admin Panel</p>
-                        <p class="text-lg font-black text-white mt-1">Manajemen Petugas</p>
+                        <p class="text-lg font-black" style="color:#ffffff;">
+    Manajemen Petugas
+</p>
                         <p class="text-xs text-purple-500 mt-6 flex items-center font-medium">Kelola akun & wilayah <svg class="w-3 h-3 ml-1 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg></p>
                     </a>
                 @endif
@@ -58,7 +60,7 @@
             @if(auth()->user()->role === 'petugas')
                 <div class="mb-12 px-4 sm:px-0">
                     <div class="flex justify-between items-center mb-6">
-                        <h3 class="text-xl font-bold text-white tracking-tight">Tugas Pemeriksaan Anda</h3>
+                        <h3 class="text-xl font-bold tracking-tight" style="color:#ffffff;">Tugas Pemeriksaan Anda</h3>
                         <span class="bg-yellow-500/10 text-yellow-500 border border-yellow-500/20 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider">
                             {{ count($titik_risikos) }} Tersisa
                         </span>
@@ -73,7 +75,9 @@
                                     </div>
                                     <div>
                                         <div class="flex items-center gap-3">
-                                            <p class="font-bold text-white text-lg">{{ $titik->nama_titik }}</p>
+                                            <p class="font-bold text-lg" style="color:#ffffff;">
+    {{ $titik->nama_titik }}
+</p>
                                             <span class="bg-blue-500/10 text-blue-400 border border-blue-500/20 text-xs px-2.5 py-0.5 rounded font-semibold uppercase tracking-wide">
                                                 {{ $titik->jenis_risiko }}
                                             </span>
@@ -101,14 +105,19 @@
                 </div>
 
                 <!-- Grafik Khusus Petugas -->
-                <div class="px-4 sm:px-0">
-                    <div class="bg-[#171717] p-8 rounded-3xl border border-[#262626]">
-                        <h3 class="font-bold text-white text-xl mb-8 tracking-tight">Statistik Pemeriksaan</h3>
-                        <div class="h-64">
-                            <canvas id="pemeriksaanChart"></canvas>
-                        </div>
-                    </div>
-                </div>
+<div class="px-4 sm:px-0">
+    <div class="bg-[#171717] p-8 rounded-3xl border border-[#262626]">
+
+        <h3 class="font-bold text-xl mb-8 tracking-tight" style="color:#ffffff;">
+            Statistik Pemeriksaan
+        </h3>
+
+        <div class="h-64 w-full">
+            <canvas id="pemeriksaanChart"></canvas>
+        </div>
+
+    </div>
+</div>
             @endif
         </div>
     </div>
@@ -120,8 +129,10 @@
     @if(auth()->user()->role === 'admin')
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mt-4 mb-16 px-4 sm:px-0">
             <div class="bg-[#171717] p-8 rounded-3xl border border-[#262626]">
-                <h3 class="font-bold text-white text-xl mb-8 tracking-tight">Tren Penambahan Titik Risiko</h3>
-                <div class="h-64">
+                <h3 class="font-bold text-xl mb-8 tracking-tight" style="color:#ffffff;">
+    Tren Penambahan Titik Risiko
+</h3>
+                <div class="h-64 w-full">
                     <canvas id="risikoChart"></canvas>
                 </div>
             </div>
@@ -129,6 +140,9 @@
 
         <script>
             const ctx = document.getElementById('risikoChart').getContext('2d');
+            const risikoRendahGrafik = {!! json_encode($risikoRendahGrafik ?? []) !!};
+            const risikoSedangGrafik = {!! json_encode($risikoSedangGrafik ?? []) !!};
+            const risikoTinggiGrafik = {!! json_encode($risikoTinggiGrafik ?? []) !!};
             
             let gradientBar = ctx.createLinearGradient(0, 0, 0, 300);
             gradientBar.addColorStop(0, 'rgba(96, 165, 250, 1)'); // retina light blue
@@ -145,14 +159,29 @@
                         borderRadius: 6,
                         borderSkipped: false,
                         barThickness: 32,
+                        categoryPercentage: 0.75,
+                        barPercentage: 0.75,
                         hoverBackgroundColor: '#93c5fd'
                     }]
                 },
                 options: {
                     responsive: true,
+                    maintainAspectRatio: false,
+                    layout: {
+                        padding: {
+                            left: 16,
+                            right: 16,
+                            top: 0,
+                            bottom: 0
+                        }
+                    },
                     scales: {
                         x: { 
-                            ticks: { color: '#a3a3a3' }, 
+                            offset: true,
+                            bounds: 'ticks',
+                            min: -0.5,
+                            max: {!! count($labels) ? count($labels) - 0.5 : 0 !!},
+                            ticks: { color: '#a3a3a3', padding: 10 }, 
                             grid: { display: false } 
                         },
                         y: { 
@@ -172,7 +201,18 @@
                             borderWidth: 1,
                             padding: 10,
                             displayColors: false,
-                            cornerRadius: 8
+                            cornerRadius: 8,
+                            callbacks: {
+                                title: (items) => items[0]?.label || '',
+                                label: (context) => {
+                                    const idx = context.dataIndex;
+                                    return [
+                                        `Risiko Rendah : ${risikoRendahGrafik[idx] ?? 0} titik`,
+                                        `Risiko Sedang : ${risikoSedangGrafik[idx] ?? 0} titik`,
+                                        `Risiko Tinggi : ${risikoTinggiGrafik[idx] ?? 0} titik`
+                                    ];
+                                }
+                            }
                         }
                     }
                 }
@@ -183,6 +223,9 @@
     @if(auth()->user()->role === 'petugas')
         <script>
             const ctxPemeriksaan = document.getElementById('pemeriksaanChart').getContext('2d');
+            const risikoRendahPemeriksaan = {!! json_encode($risikoRendahPemeriksaan ?? []) !!};
+            const risikoSedangPemeriksaan = {!! json_encode($risikoSedangPemeriksaan ?? []) !!};
+            const risikoTinggiPemeriksaan = {!! json_encode($risikoTinggiPemeriksaan ?? []) !!};
             
             let gradientLine = ctxPemeriksaan.createLinearGradient(0, 0, 0, 300);
             gradientLine.addColorStop(0, 'rgba(52, 211, 153, 0.6)'); // retina green
@@ -211,13 +254,24 @@
                 },
                 options: {
                     responsive: true,
+                    maintainAspectRatio: false,
+                    layout: {
+                        padding: {
+                            left: 0,
+                            right: 0,
+                            top: 0,
+                            bottom: 0
+                        }
+                    },
                     interaction: {
                         mode: 'index',
                         intersect: false,
                     },
                     scales: {
                         x: { 
-                            ticks: { color: '#a3a3a3' }, 
+                            offset: false,
+                            bounds: 'data',
+                            ticks: { color: '#a3a3a3', padding: 10 }, 
                             grid: { display: false } 
                         },
                         y: { 
@@ -237,7 +291,18 @@
                             borderWidth: 1,
                             padding: 10,
                             displayColors: false,
-                            cornerRadius: 8
+                            cornerRadius: 8,
+                            callbacks: {
+                                title: (items) => items[0]?.label || '',
+                                label: (context) => {
+                                    const idx = context.dataIndex;
+                                    return [
+                                        `Risiko Rendah : ${risikoRendahPemeriksaan[idx] ?? 0} titik`,
+                                        `Risiko Sedang : ${risikoSedangPemeriksaan[idx] ?? 0} titik`,
+                                        `Risiko Tinggi : ${risikoTinggiPemeriksaan[idx] ?? 0} titik`
+                                    ];
+                                }
+                            }
                         }
                     }
                 }

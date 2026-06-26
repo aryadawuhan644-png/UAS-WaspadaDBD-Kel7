@@ -36,32 +36,106 @@ class DashboardController extends Controller
             }
         }
 
-        // --- Logika Grafik Admin: Tren Penambahan Titik Risiko ---
-        $labels = [];
-        $dataGrafik = [];
-        for ($i = 5; $i >= 0; $i--) {
-            $date = now()->subMonths($i);
-            $labels[] = $date->translatedFormat('F');
-            $dataGrafik[] = (clone $query)->whereMonth('created_at', $date->month)
-                                         ->whereYear('created_at', $date->year)
-                                         ->count();
-        }
+// =======================================================
+// Grafik Admin : Penambahan Titik Risiko 7 Hari Terakhir
+// =======================================================
 
-        // --- Logika Grafik Petugas: Statistik Pemeriksaan Selesai ---
-        $labelsPemeriksaan = [];
-        $dataPemeriksaan = [];
-        for ($i = 5; $i >= 0; $i--) {
-            $date = now()->subMonths($i);
-            $labelsPemeriksaan[] = $date->translatedFormat('F');
-            
-            $dataPemeriksaan[] = PemeriksaanRisiko::whereMonth('tanggal_pemeriksaan', $date->month)
-                ->whereYear('tanggal_pemeriksaan', $date->year)
-                ->whereHas('titikRisiko', function($q) use ($user, $petugas, $namaKecamatan) {
-                    if ($user->role === 'petugas' && $petugas) {
-                        $q->where('kecamatan', 'like', trim($namaKecamatan));
-                    }
-                })->count();
-        }
+$labels = [];
+$dataGrafik = [];
+$risikoRendahGrafik = [];
+$risikoSedangGrafik = [];
+$risikoTinggiGrafik = [];
+
+for ($i = 6; $i >= 0; $i--) {
+
+    $tanggal = now()->subDays($i);
+
+    $labels[] = $tanggal->translatedFormat('D');
+
+    $dataGrafik[] = (clone $query)
+        ->whereDate('created_at', $tanggal->toDateString())
+        ->count();
+
+    $risikoRendahGrafik[] = (clone $query)
+        ->whereDate('created_at', $tanggal->toDateString())
+        ->where('level_risiko_awal', 'rendah')
+        ->count();
+
+    $risikoSedangGrafik[] = (clone $query)
+        ->whereDate('created_at', $tanggal->toDateString())
+        ->where('level_risiko_awal', 'sedang')
+        ->count();
+
+    $risikoTinggiGrafik[] = (clone $query)
+        ->whereDate('created_at', $tanggal->toDateString())
+        ->where('level_risiko_awal', 'tinggi')
+        ->count();
+}
+
+
+// =======================================================
+// Grafik Petugas : Pemeriksaan 7 Hari Terakhir
+// =======================================================
+
+$labelsPemeriksaan = [];
+$dataPemeriksaan = [];
+$risikoRendahPemeriksaan = [];
+$risikoSedangPemeriksaan = [];
+$risikoTinggiPemeriksaan = [];
+
+for ($i = 6; $i >= 0; $i--) {
+
+    $tanggal = now()->subDays($i);
+
+    $labelsPemeriksaan[] = $tanggal->translatedFormat('D');
+
+    $dataPemeriksaan[] = PemeriksaanRisiko::whereDate(
+            'tanggal_pemeriksaan',
+            $tanggal->toDateString()
+        )
+        ->whereHas('titikRisiko', function ($q) use ($user, $petugas, $namaKecamatan) {
+            if ($user->role === 'petugas' && $petugas) {
+                $q->where('kecamatan', 'like', trim($namaKecamatan));
+            }
+        })
+        ->count();
+
+    $risikoRendahPemeriksaan[] = PemeriksaanRisiko::whereDate(
+            'tanggal_pemeriksaan',
+            $tanggal->toDateString()
+        )
+        ->whereHas('titikRisiko', function ($q) use ($user, $petugas, $namaKecamatan) {
+            if ($user->role === 'petugas' && $petugas) {
+                $q->where('kecamatan', 'like', trim($namaKecamatan));
+            }
+            $q->where('level_risiko_awal', 'rendah');
+        })
+        ->count();
+
+    $risikoSedangPemeriksaan[] = PemeriksaanRisiko::whereDate(
+            'tanggal_pemeriksaan',
+            $tanggal->toDateString()
+        )
+        ->whereHas('titikRisiko', function ($q) use ($user, $petugas, $namaKecamatan) {
+            if ($user->role === 'petugas' && $petugas) {
+                $q->where('kecamatan', 'like', trim($namaKecamatan));
+            }
+            $q->where('level_risiko_awal', 'sedang');
+        })
+        ->count();
+
+    $risikoTinggiPemeriksaan[] = PemeriksaanRisiko::whereDate(
+            'tanggal_pemeriksaan',
+            $tanggal->toDateString()
+        )
+        ->whereHas('titikRisiko', function ($q) use ($user, $petugas, $namaKecamatan) {
+            if ($user->role === 'petugas' && $petugas) {
+                $q->where('kecamatan', 'like', trim($namaKecamatan));
+            }
+            $q->where('level_risiko_awal', 'tinggi');
+        })
+        ->count();
+}
 
         $data = [
             'total_titik' => (clone $query)->count(),
@@ -80,8 +154,14 @@ class DashboardController extends Controller
             })->get(),
             'labels' => $labels,
             'dataGrafik' => $dataGrafik,
+            'risikoRendahGrafik' => $risikoRendahGrafik,
+            'risikoSedangGrafik' => $risikoSedangGrafik,
+            'risikoTinggiGrafik' => $risikoTinggiGrafik,
             'labelsPemeriksaan' => $labelsPemeriksaan,
             'dataPemeriksaan' => $dataPemeriksaan,
+            'risikoRendahPemeriksaan' => $risikoRendahPemeriksaan,
+            'risikoSedangPemeriksaan' => $risikoSedangPemeriksaan,
+            'risikoTinggiPemeriksaan' => $risikoTinggiPemeriksaan,
         ];
 
         return view('dashboard', $data);

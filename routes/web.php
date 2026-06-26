@@ -10,7 +10,12 @@ use App\Http\Controllers\WilayahController;
 use App\Http\Controllers\PetugasController;
 
 // 1. RUTE PUBLIK
-Route::get('/', function () { return view('welcome'); });
+Route::get('/', function () {
+    return redirect('/frontend-zayy');
+});
+Route::get('/backend', function () {
+    return view('welcome');
+});
 Route::get('/edukasi', [EdukasiDbdController::class, 'indexPublik'])->name('edukasi.publik');
 Route::get('/edukasi/{id}', [EdukasiDbdController::class, 'showPublik'])->name('edukasi.show');
 

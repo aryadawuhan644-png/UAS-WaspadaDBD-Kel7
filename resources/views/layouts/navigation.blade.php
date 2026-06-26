@@ -82,9 +82,11 @@
                     {{ __('Pemeriksaan') }}
                 </x-responsive-nav-link>
 
-                <x-responsive-nav-link :href="route('titik-risiko.index')" :active="false">
-                    {{ __('Jumlah Titik Risiko') }}
-                </x-responsive-nav-link>
+                <x-responsive-nav-link
+    :href="route('titik-risiko.jumlah')"
+    :active="request()->routeIs('titik-risiko.jumlah')">
+    {{ __('Jumlah Titik Risiko') }}
+</x-responsive-nav-link>
 
                 <x-responsive-nav-link :href="route('edukasi.index')" :active="request()->routeIs('edukasi.*')">
                     {{ __('Edukasi Warga') }}

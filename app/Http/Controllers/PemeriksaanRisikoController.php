@@ -164,8 +164,16 @@ class PemeriksaanRisikoController extends Controller
             if ($pemeriksaan->foto) {
                 \Illuminate\Support\Facades\Storage::disk('public')->delete($pemeriksaan->foto);
             }
-            $path = $request->file('foto_akhir')->store('foto_pemeriksaan', 'public');
-            $pemeriksaan->foto = $path; 
+            $file = $request->file('foto');
+
+$namaFile = time().'_'.$file->getClientOriginalName();
+
+$file->move(
+    base_path('storage/foto_pemeriksaan'),
+    $namaFile
+);
+
+$pemeriksaan->foto = 'foto_pemeriksaan/'.$namaFile;
         }
 
         $pemeriksaan->save();
