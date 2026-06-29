@@ -199,7 +199,8 @@ include 'includes/header.php';
         });
     }
     function update(){
-        fetch('/api/titik-risiko')
+        // Menggunakan jalur proxy agar tidak diblokir CORS InfinityFree
+        fetch('proxy.php?endpoint=titik-risiko')
         .then(function(r){return r.json();})
         .then(function(d){
             if(d.status==='success'&&d.data){

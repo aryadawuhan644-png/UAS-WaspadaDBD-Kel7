@@ -8,10 +8,12 @@ use App\Http\Controllers\PemeriksaanRisikoController;
 use App\Http\Controllers\EdukasiDbdController;
 use App\Http\Controllers\WilayahController;
 use App\Http\Controllers\PetugasController;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 // 1. RUTE PUBLIK
 Route::get('/', function () {
-    return redirect('/frontend-zayy');
+    return view('welcome');
 });
 Route::get('/backend', function () {
     return view('welcome');
@@ -57,3 +59,14 @@ Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+// --- OVERRIDE LOGOUT BAWAAN LARAVEL ---
+Route::match(['get', 'post'], '/logout', function (Request $request) {
+    Auth::guard('web')->logout();
+    
+    $request->session()->invalidate();
+    $request->session()->regenerateToken();
+    
+    // Arahkan ke halaman utama backend
+    return redirect('/backend');
+})->name('logout');
